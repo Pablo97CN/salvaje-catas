@@ -1,0 +1,26 @@
+# --- Raíz ---
+.env
+.vscode/
+.idea/
+*.log
+.DS_Store
+
+# --- Backend (Laravel) ---
+backend/.env
+backend/vendor/
+
+# Ignorar todo storage pero mantener los .gitignore internos
+backend/storage/*
+!backend/storage/**/.gitignore
+
+# Ignorar bootstrap/cache generado pero mantener su .gitignore
+backend/bootstrap/cache/*
+!backend/bootstrap/cache/.gitignore
+
+# Opcional: caches de Laravel
+backend/.phpunit.result.cache
+
+# --- Frontend (Vite/React) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env
