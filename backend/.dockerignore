@@ -1,0 +1,27 @@
+# Ignorar entornos y configs locales
+.env
+.env.*
+!.env.example
+
+# Ignorar dependencias de Composer
+/vendor
+
+# Ignorar cachés y logs de Laravel
+/storage
+!/storage/**/.gitignore
+/bootstrap/cache
+!/bootstrap/cache/.gitignore
+
+# Ignorar resultados de PHPUnit
+.phpunit.result.cache
+
+# Ignorar IDE y sistema
+.vscode
+.idea
+*.log
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos temporales
+*.tmp
+*.swp

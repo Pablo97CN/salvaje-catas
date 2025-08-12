@@ -1,0 +1,21 @@
+# Ignorar entornos y configs locales
+.env
+.env.*
+!.env.example
+
+# Ignorar dependencias de Node
+/node_modules
+
+# Ignorar build de producción (lo generará el contenedor si hace falta)
+dist
+
+# Ignorar IDE y sistema
+.vscode
+.idea
+*.log
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos temporales
+*.tmp
+*.swp

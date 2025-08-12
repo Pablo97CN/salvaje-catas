@@ -3,25 +3,28 @@ services:
     image: postgres:15
     container_name: salvaje-catas-db
     restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
-      POSTGRES_DB: salvajecatas
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d salvajecatas"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "5432:5432"
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-   
     container_name: salvaje-catas-backend
     restart: unless-stopped
     working_dir: /var/www
@@ -38,7 +41,7 @@ services:
     networks:
       - app-network
     user: "www-data"
-    
+
   frontend:
     build:
       context: ./frontend
@@ -79,3 +82,4 @@ volumes:
 networks:
   app-network:
     driver: bridge
+
