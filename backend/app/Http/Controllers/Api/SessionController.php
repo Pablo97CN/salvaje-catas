@@ -19,7 +19,7 @@ class SessionController extends Controller
         ]);
 
         // Intenta autenticar (guard web, sesión)
-        if (! Auth::attempt($credentials, true)) {
+        if (! Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
                 'email' => ['Credenciales inválidas.'],
             ])->status(422);

@@ -1,0 +1,6 @@
+use App\Models\Usuario; // si tu modelo es Usuario
+Usuario::updateOrCreate(
+  ['email' => 'admin@salvajecatas.com'],
+  ['nombre' => 'Administrador','telefono'=>'600000000','password'=>'admin123','rol'=>'admin']
+);
+exit
