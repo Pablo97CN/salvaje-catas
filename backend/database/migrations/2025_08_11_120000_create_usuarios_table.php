@@ -17,8 +17,8 @@ return new class extends Migration
 
             // Datos básicos
             $table->string('nombre', 120);
-            $table->string('email')->unique();
-            $table->string('telefono', 20)->nullable();
+            $table->string('email')->unique(); 
+            $table->string('telefono', 16)->unique();
 
             // Auth
             $table->timestampTz('email_verified_at')->nullable();

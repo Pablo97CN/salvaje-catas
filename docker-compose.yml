@@ -56,6 +56,25 @@ services:
     networks:
       - app-network
 
+  frontend-admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: salvaje-catas-frontend-admin
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./admin:/app
+      - node_modules_admin:/app/node_modules 
+    expose:
+      - "5174"
+    command: ["npm","run","dev","--","--host","0.0.0.0","--port","5174"]
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+
   nginx:
     image: nginx:stable-alpine
     container_name: salvaje-catas-nginx
@@ -75,9 +94,14 @@ volumes:
   postgres-data:
     name: salvaje-catas-postgres-data
     external: true
+
   node_modules:
     name: salvaje-catas-node_modules
     external: true
+    
+  node_modules_admin:                          
+    name: salvaje-catas-node_modules_admin     
+    external: true  
 
 networks:
   app-network:

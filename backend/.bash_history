@@ -75,3 +75,20 @@ exit
 php artisan config:clear
 php artisan migrate:fresh --seed
 exit
+php artisan install:api
+exit
+php artisan migrate:fresh --seed
+exit
+php artisan migrate:fresh --seed
+exit
+php artisan migrate:fresh --seed
+docker compose exec backend php artisan make:request StoreServicioRequest
+php artisan make:request StoreServicioRequest
+php artisan make:request UpdateServicioRequest
+php artisan make:request RegisterRequest
+php artisan make:request LoginRequest
+php artisan make:request UpdateMeRequest
+exit
+php artisan make:request StoreReservaRequest.php
+exit
+exit

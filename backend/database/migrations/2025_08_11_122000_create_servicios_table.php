@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->id();
 
             $table->string('nombre', 150);
-            $table->string('slug', 180)->unique();
             $table->text('descripcion')->nullable();
 
             // Características fijas (sin JSONB)
