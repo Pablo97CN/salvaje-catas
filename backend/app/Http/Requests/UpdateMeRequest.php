@@ -21,7 +21,15 @@ class UpdateMeRequest extends FormRequest
                 'sometimes', 'required', 'string', 'max:20',
                 Rule::unique('usuarios', 'telefono')->ignore($this->user()->id),
             ],
-            // Añadiremos email/password si decides habilitar su edición por el usuario
+            // el usuario puede actualizar su email
+            'email' => [
+                'sometimes', 'required', 'email', 'max:255',
+                Rule::unique('usuarios', 'email')->ignore($id),
+            ],
+
+            // Si llega password, debe ser válida (no vacía, min 8)
+            // Si no llega, NO se toca la contraseña actual (no se pone a null).
+            'password' => ['sometimes','required','string','min:8'],
         ];
     }
 
@@ -44,6 +52,15 @@ class UpdateMeRequest extends FormRequest
             'telefono.string'    => 'El :attribute debe ser texto.',
             'telefono.max'       => 'El :attribute no puede superar :max caracteres.',
             'telefono.unique'    => 'Este :attribute ya está registrado.',
+
+            'email.required'     => 'El :attribute es obligatorio.',
+            'email.email'        => 'El :attribute debe tener un formato válido.',
+            'email.max'          => 'El :attribute no puede superar :max caracteres.',
+            'email.unique'       => 'Este :attribute ya está registrado.',
+
+            'password.required'  => 'La :attribute es obligatoria cuando se envía.',
+            'password.string'    => 'La :attribute debe ser texto.',
+            'password.min'       => 'La :attribute debe tener al menos :min caracteres.',
         ];
     }
 }

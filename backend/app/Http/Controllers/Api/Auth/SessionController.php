@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 class SessionController extends Controller
 {
     // POST /api/login
-    public function store(Request $request)
+    public function login(Request $request)
     {
         // Valida credenciales básicas
         $credentials = $request->validate([
@@ -31,8 +31,14 @@ class SessionController extends Controller
         return response()->json(['message' => 'ok'], 200);
     }
 
+    // GET /api/me  (web + auth)
+    public function me(Request $request)
+        {
+            return $request->user();
+        }
+
     // POST /api/logout
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
 

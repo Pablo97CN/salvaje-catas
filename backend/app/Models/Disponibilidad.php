@@ -39,7 +39,7 @@ class Disponibilidad extends Model
 
     public function getEstaDisponibleAttribute(): bool
     {
-        $tieneReserva = $this->relationLoaded('reserva')
+        $hayReservaActiva = $this->relationLoaded('reserva')
             ? ($this->reserva !== null)
             : $this->reserva()->exists();
 
@@ -53,6 +53,8 @@ class Disponibilidad extends Model
     {
         return $query
             ->where('abierta', true)
-            ->whereDoesntHave('reserva');
+            ->whereDoesntHave('reserva', function ($r) {
+                $r->whereHas('estado', fn($e) => $e->where('codigo','!=','cancelada'));
+            });
     }
 }

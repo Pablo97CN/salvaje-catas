@@ -92,3 +92,5 @@ exit
 php artisan make:request StoreReservaRequest.php
 exit
 exit
+php artisan optimize:clear
+exit
